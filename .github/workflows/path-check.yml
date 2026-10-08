@@ -1,0 +1,39 @@
+# Path check: locked paths (CAAS-1382) and earlier backlog items' assertions (CAAS-1390). Locked (config/gates/locked-paths.txt).
+#
+# Runs on pull_request_target, so GitHub takes this file from main, never from the PR's branch:
+# a PR cannot weaken the check that judges it. It checks out main only (the default for
+# pull_request_target) and reads the PR's changed-file list through the API; PR code is never
+# checked out or run, which keeps pull_request_target safe.
+# Required status check through .github/rulesets/main.json (applied by the IT runbook).
+name: path-check
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  path-check:
+    # Not in the template repo itself, where changing locked paths is the job. Prototype repos
+    # created from it are not templates, so the check always runs there.
+    if: ${{ !github.event.repository.is_template }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v7   # main, not the PR head
+        with:
+          sparse-checkout: config/gates
+      - name: Changed files of the PR (renames count with both names)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh api --paginate "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files"
+          --jq '.[] | .filename, (.previous_filename // empty)' > "$RUNNER_TEMP/changed.txt"
+      - name: Locked paths
+        run: python3 config/gates/path_check.py config/gates/locked-paths.txt < "$RUNNER_TEMP/changed.txt"
+      # TODO(CAAS-1390): fail if the PR changes or deletes a test tagged with another backlog item's
+      # ID. Needs the item in flight from the backlog state block, whose format is still open
+      # (docs/open-points.md #2).

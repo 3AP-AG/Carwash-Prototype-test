@@ -1,0 +1,5 @@
+{
+  "//": "Marks the gate configs as ES modules. Locked with the rest of config/gates/.",
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,19 @@
+{
+  "//": "Gate: typecheck of e2e/. Locked, self-contained. Run by make as tsc -p config/gates/tsconfig.e2e.json. Paths are relative to this file; packages resolve from e2e/node_modules.",
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "typeRoots": ["../../e2e/node_modules/@types"],
+    "types": ["node"]
+  },
+  "include": ["../../e2e"],
+  "exclude": ["../../e2e/node_modules"]
+}

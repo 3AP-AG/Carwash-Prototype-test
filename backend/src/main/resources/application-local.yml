@@ -1,0 +1,14 @@
+# Local profile (`make dev`). Still protected: passcode mode by default, login mode with
+# PROTECTION_MODE=login. Seeded local-only credentials (src/local/db/R__local_seed.sql): passcode
+# `local-passcode`; user `local`, password `local-password`. The seed lives outside src/main, so it
+# is never packaged into the image; a deployed prototype cannot run it. Paths are relative to backend/.
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/prototype
+    username: prototype
+    password: prototype
+  flyway:
+    # Used by the `migrate` run only (application-migrate.yml turns Flyway on); the app never migrates.
+    locations: classpath:db/migration,filesystem:src/local/db
+prototype:
+  protection-mode: ${PROTECTION_MODE:passcode}

@@ -1,0 +1,20 @@
+# Client passcode job (CAAS-1381), in this prototype's own pipeline so no credential spans prototypes. Triggered from the builder's session via the method skill.
+name: passcode
+
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: Neutral label, never a client name
+        required: true
+      valid-days:
+        description: Days until expiry; capped at poc-expires
+        required: true
+
+jobs:
+  create-token:
+    # TODO(CAAS-1381): uses: 3AP-AG/<platform-repo>/.github/workflows/passcode.yml@v1
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - run: 'echo "TODO(CAAS-1381): passcode via the platform reusable workflow" && exit 1'

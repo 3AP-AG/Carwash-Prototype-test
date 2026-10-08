@@ -1,0 +1,57 @@
+# Thin caller. Gates run here; deploy logic lives in the platform repo.
+# Locked (config/gates/locked-paths.txt).
+#
+# Time budget: the whole run, gates through acceptance, takes at most 10 minutes. Jobs run in
+# sequence, so their timeouts add up to at most 10: gates 4 + deploy/acceptance 6. Starting split,
+# tuned on the first prototype (docs/platform-contract.md §6).
+#
+# Not here on purpose: the path check (path-check.yml), required checks and auto-merge (repo
+# ruleset, CAAS-1382), the failure-summary writer (CAAS-1381), Playwright against the candidate (CAAS-1389).
+name: pipeline
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: pipeline-${{ github.ref }}
+  cancel-in-progress: true   # a newer run on the same branch cancels the older one
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: backend/pom.xml
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.local/share/pnpm/store
+            .gates-cache/*.jar
+          key: gates-${{ runner.os }}-${{ hashFiles('frontend/pnpm-lock.yaml', 'e2e/pnpm-lock.yaml', 'Makefile') }}
+      - run: make install
+      - run: make check      # lint → typecheck → test → staleness of spec, client and token files
+
+  deploy:
+    # Disabled until the platform's reusable workflow exists (CAAS-1380). Without this, every
+    # merge to main would fail on a stub that is not this repo's to build.
+    if: false
+    needs: gates
+    # TODO(CAAS-1380): uses: 3AP-AG/<platform-repo>/.github/workflows/deploy.yml@v1
+    #   with: protection-mode from prototype.yaml, image
+    #   covers migrations (`<image> migrate`), candidate deploy, Playwright acceptance, traffic shift
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - run: 'echo "TODO(CAAS-1380): deploy via the platform reusable workflow" && exit 1'

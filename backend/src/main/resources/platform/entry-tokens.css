@@ -1,0 +1,78 @@
+/**
+ * GENERATED from design-tokens/tokens.json by `make generate`. Never edit by hand.
+ */
+
+:root {
+  --color-grayscale-black: #242424;
+  --color-grayscale-grey: #8E8E8E;
+  --color-grayscale-soft-grey: #DEDEDE;
+  --color-grayscale-light-grey: #F7F7F7;
+  --color-grayscale-white: #FFFFFF;
+  --color-accent-arctic-base: #DFF7FF;
+  --color-accent-arctic-shade: #B2C6CC;
+  --color-accent-coral-base: #FFDFDF;
+  --color-accent-coral-shade: #CCB2B2;
+  --color-accent-mint-base: #DFFFE8;
+  --color-accent-mint-shade: #B2CCBA;
+  --color-accent-lindigo-base: #E9DFFF;
+  --color-accent-lindigo-shade: #BAB2CC;
+  --color-accent-flint-base: #DFE8FF;
+  --color-accent-flint-shade: #B2BACC;
+  --color-accent-peach-base: #FFECDF;
+  --color-accent-peach-shade: #CCBDB2;
+  --color-accent-lime-base: #F1FFDF;
+  --color-accent-lime-shade: #C1CCB2;
+  --color-accent-blush-base: #FFDFF8;
+  --color-accent-blush-shade: #CCB2C6;
+  --color-status-green: #58CF9D;
+  --color-status-red: #FF7777;
+  --color-status-blue: #5896CF;
+  --color-status-orange: #FFB877;
+  --font-family-base: 'Beausite Classic', system-ui, sans-serif;
+  --space-0: 0px;
+  --space-5: 5px;
+  --space-10: 10px;
+  --space-20: 20px;
+  --space-30: 30px;
+  --space-40: 40px;
+  --space-50: 50px;
+  --space-100: 100px;
+  --space-150: 150px;
+  --space-200: 200px;
+  --space-px: 1px;
+  --typography-level-6-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-6-font-weight: 600;
+  --typography-level-6-font-size: 35px;
+  --typography-level-6-line-height: normal;
+  --typography-level-6-letter-spacing: -0.02em;
+  --typography-level-11-light-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-11-light-font-weight: 300;
+  --typography-level-11-light-font-size: 16px;
+  --typography-level-11-light-line-height: 1.5;
+  --typography-level-11-light-letter-spacing: 0em;
+  --typography-level-11-regular-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-11-regular-font-weight: 400;
+  --typography-level-11-regular-font-size: 16px;
+  --typography-level-11-regular-line-height: 1.5;
+  --typography-level-11-regular-letter-spacing: 0em;
+  --typography-level-11-semibold-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-11-semibold-font-weight: 600;
+  --typography-level-11-semibold-font-size: 16px;
+  --typography-level-11-semibold-line-height: 1.5;
+  --typography-level-11-semibold-letter-spacing: 0em;
+  --typography-level-12-light-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-12-light-font-weight: 300;
+  --typography-level-12-light-font-size: 14px;
+  --typography-level-12-light-line-height: 1.5;
+  --typography-level-12-light-letter-spacing: 0em;
+  --typography-level-12-regular-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-12-regular-font-weight: 400;
+  --typography-level-12-regular-font-size: 14px;
+  --typography-level-12-regular-line-height: 1.5;
+  --typography-level-12-regular-letter-spacing: 0em;
+  --typography-level-12-semibold-font-family: 'Beausite Classic', system-ui, sans-serif;
+  --typography-level-12-semibold-font-weight: 600;
+  --typography-level-12-semibold-font-size: 14px;
+  --typography-level-12-semibold-line-height: 1.5;
+  --typography-level-12-semibold-letter-spacing: 0em;
+}

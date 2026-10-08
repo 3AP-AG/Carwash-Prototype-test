@@ -1,0 +1,7 @@
+# Test-only overrides, layered on top of src/main/resources/application.yml.
+# Tests run the real Flyway migrations against the Testcontainers Postgres (support/PostgresContainer).
+spring:
+  flyway:
+    enabled: true
+prototype:
+  protection-mode: passcode

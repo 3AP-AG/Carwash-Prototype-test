@@ -1,0 +1,28 @@
+# Platform-set, NOT configured here (CAAS-1379, docs/platform-contract.md §5): hikari maximum-pool-size=2,
+# minimum-idle=0, idle-timeout=30s and Cloud Run --max-instances=2. The platform's deploy workflow sets
+# them as env vars (SPRING_DATASOURCE_HIKARI_*), which override this file. The hard guard is the
+# database role's CONNECTION LIMIT 6: a prototype that raises its pool only starves itself.
+# Database connection: SPRING_DATASOURCE_URL / _USERNAME / _PASSWORD, set by the platform.
+spring:
+  threads:
+    virtual:
+      enabled: true          # Spring MVC on virtual threads, not WebFlux
+  flyway:
+    enabled: false           # migrations run as a pipeline step (`<image> migrate`), never at startup
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate     # the schema comes from Flyway only
+  session:
+    jdbc:
+      initialize-schema: never   # tables come from V3__platform_spring_session.sql
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: native   # Cloud Run terminates TLS; redirects must keep https
+  # Session cookie flags (HttpOnly, Secure, SameSite=Lax): platform/security/SessionCookieConfig.
+springdoc:
+  api-docs:
+    enabled: false           # the spec is generated at build time into api/openapi.yaml; the app doesn't serve it
+  writer-with-order-by-keys: true
+prototype:
+  protection-mode: ${PROTECTION_MODE}   # login | passcode; startup fails otherwise (platform/security)

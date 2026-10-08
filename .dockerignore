@@ -1,0 +1,10 @@
+**/node_modules
+**/target
+**/dist
+**/.DS_Store
+.git
+.gates-cache
+e2e
+docs
+backend/src/local
+backend/src/test

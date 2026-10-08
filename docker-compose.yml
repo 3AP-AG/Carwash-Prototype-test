@@ -1,0 +1,48 @@
+# Local only. `make dev` uses just Postgres; `make up` also runs the built image the way the
+# platform will: a one-shot `migrate`, then the app. Tests use Testcontainers instead.
+# The local seed (passcode `local-passcode`; user `local` / `local-password`) is mounted from
+# backend/src/local; the image never contains it. `PROTECTION_MODE=login make up` for login mode.
+# Postgres 17 here and in tests (support/PostgresContainer). TODO(CAAS-1378): match the Cloud SQL
+# version provisioning creates.
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: prototype
+      POSTGRES_USER: prototype
+      POSTGRES_PASSWORD: prototype
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prototype -d prototype"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+
+  migrate:
+    profiles: [app]
+    build: .
+    image: prototype:local
+    command: ["migrate"]
+    environment: &db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/prototype
+      SPRING_DATASOURCE_USERNAME: prototype
+      SPRING_DATASOURCE_PASSWORD: prototype
+      SPRING_FLYWAY_LOCATIONS: classpath:db/migration,filesystem:/local-seed
+    volumes:
+      - ./backend/src/local/db:/local-seed:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  app:
+    profiles: [app]
+    image: prototype:local
+    environment:
+      <<: *db
+      PROTECTION_MODE: ${PROTECTION_MODE:-passcode}
+    ports:
+      - "8080:8080"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully

@@ -1,0 +1,7 @@
+# Gate: files the format check skips. Locked. Patterns are relative to this file.
+**/node_modules/
+../../frontend/dist/
+../../frontend/src/api/generated/
+**/pnpm-lock.yaml
+../../frontend/src/ui/tokens/tokens.css
+../../frontend/src/ui/tokens/tokens.ts

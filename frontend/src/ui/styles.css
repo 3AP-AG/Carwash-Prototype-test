@@ -1,0 +1,7 @@
+/* ui/styles.css: global CSS loaded once through `@/ui` (index.ts). Components are styled by the MUI
+   theme (theme.ts); this file only makes the token variables and the font available. */
+@import './tokens/tokens.css';
+
+/* TODO(fonts): @font-face for Beausite Classic Light (300), Regular (400), Semibold (600) once the
+   woff2 files are in ui/fonts/ (docs/open-points.md #19). Until then browsers use the fallback in
+   --font-family-base unless the font is installed locally. */

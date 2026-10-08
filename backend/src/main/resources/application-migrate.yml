@@ -1,0 +1,6 @@
+# `<image> migrate` only (platform/migrate). No web server; Flyway runs, then the JVM exits.
+spring:
+  main:
+    web-application-type: none
+  flyway:
+    enabled: true

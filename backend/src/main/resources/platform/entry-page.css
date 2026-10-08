@@ -1,0 +1,94 @@
+/* The /gate and /login pages (platform/web/EntryPage), inlined after entry-tokens.css. Every colour,
+   size and space is a token variable; the choices follow ui/theme.ts: black primary, title = Level 6,
+   body = Level 11 Light, labels and button = Level 12 Regular, square corners, status red only as
+   a marker, never for text. Locked with the rest of platform/. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-20);
+  background: var(--color-grayscale-light-grey);
+  color: var(--color-grayscale-black);
+  font-family: var(--typography-level-11-light-font-family);
+  font-weight: var(--typography-level-11-light-font-weight);
+  font-size: var(--typography-level-11-light-font-size);
+  line-height: var(--typography-level-11-light-line-height);
+}
+
+main {
+  width: 100%;
+  max-width: calc(2 * var(--space-200));
+  padding: var(--space-40);
+  background: var(--color-grayscale-white);
+  border: var(--space-px) solid var(--color-grayscale-soft-grey);
+}
+
+h1 {
+  margin: 0 0 var(--space-30);
+  font-family: var(--typography-level-6-font-family);
+  font-weight: var(--typography-level-6-font-weight);
+  font-size: var(--typography-level-6-font-size);
+  line-height: var(--typography-level-6-line-height);
+  letter-spacing: var(--typography-level-6-letter-spacing);
+}
+
+form {
+  display: grid;
+  gap: var(--space-10);
+}
+
+label {
+  font-family: var(--typography-level-12-regular-font-family);
+  font-weight: var(--typography-level-12-regular-font-weight);
+  font-size: var(--typography-level-12-regular-font-size);
+  color: var(--color-grayscale-grey);
+}
+
+input {
+  width: 100%;
+  margin-bottom: var(--space-10);
+  padding: var(--space-10);
+  border: var(--space-px) solid var(--color-grayscale-grey);
+  border-radius: 0;
+  background: var(--color-grayscale-white);
+  color: var(--color-grayscale-black);
+  font: inherit;
+}
+
+input:hover {
+  border-color: var(--color-grayscale-black);
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: calc(2 * var(--space-px)) solid var(--color-grayscale-black);
+  outline-offset: var(--space-px);
+}
+
+button {
+  justify-self: start;
+  padding: var(--space-10) var(--space-20);
+  border: 0;
+  border-radius: 0;
+  background: var(--color-grayscale-black);
+  color: var(--color-grayscale-white);
+  font-family: var(--typography-level-12-regular-font-family);
+  font-weight: var(--typography-level-12-regular-font-weight);
+  font-size: var(--typography-level-12-regular-font-size);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+[role='alert'] {
+  margin: 0 0 var(--space-20);
+  padding: var(--space-10) var(--space-20);
+  border-left: var(--space-5) solid var(--color-status-red);
+  background: var(--color-grayscale-light-grey);
+}

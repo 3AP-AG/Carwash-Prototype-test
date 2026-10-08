@@ -1,0 +1,5 @@
+{
+  "//": "Editor and Vite only. The typecheck gate runs config/gates/tsconfig.gate.json directly, so loosening this file changes nothing in CI.",
+  "extends": "../config/gates/tsconfig.gate.json",
+  "include": ["src"]
+}

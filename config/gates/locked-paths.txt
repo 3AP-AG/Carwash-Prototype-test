@@ -1,0 +1,26 @@
+# The one list of locked paths, read by the path check (.github/workflows/path-check.yml).
+# A PR touching any of these fails the check; only an org admin can override it (.github/rulesets/main.json).
+CLAUDE.md
+.template-version
+Makefile
+.github/**
+config/gates/**
+e2e/playwright.config.ts
+# The Maven wrapper runs every backend gate; a changed wrapper could skip them.
+backend/mvnw
+backend/mvnw.cmd
+backend/.mvn/**
+# Template components: the security chain, login, passcode gate, errors, the migrate mode.
+# Locked because a change here can leave the demo URL unprotected.
+backend/src/main/java/ch/aaap/prototype/platform/**
+backend/src/test/java/ch/aaap/prototype/platform/**
+backend/src/main/resources/db/migration/V1__platform_app_user.sql
+backend/src/main/resources/db/migration/V2__platform_access_token.sql
+backend/src/main/resources/db/migration/V3__platform_spring_session.sql
+frontend/src/platform/**
+# The /gate and /login page styles (platform/web/EntryPage); entry-tokens.css is generated from the tokens.
+backend/src/main/resources/platform/**
+# Design tokens: exported from the 3ap Design System, never transcribed or changed in a prototype.
+# New tokens arrive with a template update (design-tokens/EXPORTED_FROM.md).
+design-tokens/**
+frontend/src/ui/tokens/**
