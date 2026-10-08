@@ -10,6 +10,9 @@ UI language: German
 
 ## D-01 · Must · A customer books a wash appointment
 Status: open
+Built on pull request #1: the gates pass in CI and the acceptance tests below pass against the
+built image locally. Template version 0.1.0 has no deploy job yet (CAAS-1380), so there is no demo
+URL to check the item against; it stays `open` until the prototype can be opened and verified.
 - [ ] The booking page offers a choice of at least three wash programmes, each shown with its name and price
 - [ ] The customer can pick a date and a time and enter their name and licence plate
 - [ ] Submitting the form with the name or the licence plate empty keeps the customer on the page and shows an error next to the empty field
