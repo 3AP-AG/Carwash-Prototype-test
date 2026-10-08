@@ -4,6 +4,43 @@ info:
   version: "1"
 servers: []
 paths:
+  /api/bookings:
+    post:
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBookingRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookingResponse"
+          description: Created
+      tags:
+      - bookings
+  /api/bookings/{id}:
+    get:
+      operationId: getBooking
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookingResponse"
+          description: OK
+      tags:
+      - bookings
   /api/examples:
     get:
       operationId: listExamples
@@ -96,6 +133,76 @@ paths:
       - examples
 components:
   schemas:
+    BookingResponse:
+      type: object
+      properties:
+        appointmentDate:
+          type: string
+          format: date
+        appointmentTime:
+          type: string
+          format: time-local
+        createdAt:
+          type: string
+          format: date-time
+        customerName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        licencePlate:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        version:
+          type: integer
+          format: int64
+        washProgramme:
+          type: string
+          enum:
+          - BASIC
+          - COMFORT
+          - PREMIUM
+      required:
+      - appointmentDate
+      - appointmentTime
+      - createdAt
+      - customerName
+      - id
+      - licencePlate
+      - updatedAt
+      - version
+      - washProgramme
+    CreateBookingRequest:
+      type: object
+      properties:
+        appointmentDate:
+          type: string
+          format: date
+        appointmentTime:
+          type: string
+          format: time-local
+        customerName:
+          type: string
+          maxLength: 100
+          minLength: 0
+        licencePlate:
+          type: string
+          maxLength: 20
+          minLength: 0
+        washProgramme:
+          type: string
+          enum:
+          - BASIC
+          - COMFORT
+          - PREMIUM
+      required:
+      - appointmentDate
+      - appointmentTime
+      - customerName
+      - licencePlate
+      - washProgramme
     CreateExampleRequest:
       type: object
       properties:
