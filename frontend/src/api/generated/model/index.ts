@@ -5,6 +5,10 @@
  * OpenAPI spec version: 1
  */
 
+export * from './bookingResponse';
+export * from './bookingResponseWashProgramme';
+export * from './createBookingRequest';
+export * from './createBookingRequestWashProgramme';
 export * from './createExampleRequest';
 export * from './createExampleRequestStatus';
 export * from './exampleResponse';

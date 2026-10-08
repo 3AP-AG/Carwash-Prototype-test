@@ -4,5 +4,5 @@
 schemaVersion: 1
 protection: passcode        # login | passcode → pipeline passes it on as PROTECTION_MODE
 slug: ~                     # written on the first pipeline run
-tier: ~                     # standard | restricted
+tier: standard              # standard | restricted
 expires: ~                  # YYYY-MM-DD
